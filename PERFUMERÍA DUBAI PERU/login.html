@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login - PERFUMERÍA DUBAI PERU</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0b0b0b;
+  --gold:#C7A008;
+  --ivory:#F8F5EF;
+  --muted:#bfb7a6;
+  --radius:12px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:linear-gradient(180deg,#080808 0%, #0f0f0f 100%);
+  color:var(--ivory);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+/* Header centrado */
+.header{
+  width:100%;
+  max-width:400px;
+  margin-bottom:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+.header .logo{
+  width:80px;
+  height:80px;
+  border-radius:15px;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--gold),#f4d96b);
+  border:2px solid rgba(199,160,8,0.12);
+  margin-bottom:12px;
+}
+.header .logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.header h{
+  font-family:Cinzel,serif;
+  color:var(--ivory);
+  font-size:20px;
+  letter-spacing:1px;
+}
+
+/* Card */
+.card{
+  width:100%;
+  max-width:400px;
+  background:#0f0f10;
+  padding:28px;
+  border-radius:var(--radius);
+  box-shadow:0 12px 30px rgba(0,0,0,0.6);
+}
+.card h2{
+  font-family:Cinzel;
+  text-align:center;
+  margin-bottom:20px;
+  color:var(--gold);
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:#121212;
+  color:var(--ivory);
+  margin-top:10px;
+  font-size:15px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  background:var(--gold);
+  color:#111;
+  font-weight:800;
+  margin-top:16px;
+  cursor:pointer;
+  font-family:Cinzel;
+}
+
+.small{
+  font-size:14px;
+  text-align:center;
+  margin-top:12px;
+}
+.small a{
+  color:var(--gold);
+  text-decoration:none;
+  font-weight:700;
+}
+
+.alert{
+  margin-top:12px;
+  padding:10px;
+  border-radius:8px;
+  display:none;
+  font-weight:600;
+}
+
+/* Estilo positivo y negativo */
+.alert.success{background:#e6f9ea;color:#1b6b2a;}
+.alert.error{background:#fee9d0;color:#5a3b00;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo"><img src="logo.png" alt="logo"></div>
+  <h1>PERFUMERÍA DUBAI PERU</h1>
+</div>
+
+<div class="card">
+  <h2>Iniciar sesión</h2>
+
+  <input id="emailUser" placeholder="Correo o usuario" />
+  <input id="password" placeholder="Contraseña" type="password" />
+
+  <button id="loginBtn">Entrar</button>
+
+  <div class="alert" id="loginAlert"></div>
+
+  <p class="small">¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+// --- LOGIN CONTROLADO ---
+document.getElementById("loginBtn").addEventListener("click", () => {
+  const id = document.getElementById("emailUser").value.trim();
+  const pw = document.getElementById("password").value;
+
+  const res = login(id, pw);
+  const a = document.getElementById("loginAlert");
+  a.style.display = "block";
+
+  if(res.ok){
+    a.textContent = res.msg;
+    a.className = "alert success";
+
+    setTimeout(() => {
+      // Si es admin → panel admin
+      if(res.admin){
+        window.location.href = "admin.html";
+        return;
+      }
+
+      // Si es usuario normal → directo al INDEX
+      window.location.href = "index.html";
+    }, 700);
+
+  } else {
+    a.textContent = res.msg;
+    a.className = "alert error";
+  }
+});
+</script>
+
+</body>
+</html>
+

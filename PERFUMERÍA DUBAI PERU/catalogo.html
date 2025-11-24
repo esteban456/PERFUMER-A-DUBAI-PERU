@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catálogo - PERFUMERÍA DUBAI PERU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --black:#0b0b0b;
+  --gold:#C7A008;
+  --ivory:#F8F5EF;
+  --muted:#bfb7a6;
+  --max:1200px;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--ivory);
+  color:var(--black);
+  min-height:100vh;
+}
+
+/* Header */
+.header{
+  width:100%;
+  background:var(--black);
+  padding:14px 30px;
+  position:sticky;
+  top:0;
+  z-index:50;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+}
+.header .inner{
+  max-width:var(--max);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.header strong{
+  font-family:Cinzel;
+  color:white;
+  font-size:22px;
+  letter-spacing:2px;
+}
+
+/* Filtros */
+.filters{
+  max-width:var(--max);
+  margin:26px auto;
+  display:flex;
+  gap:12px;
+  padding:0 18px;
+  align-items:center;
+}
+select{
+  padding:8px;
+  border-radius:var(--radius);
+  border:1px solid rgba(0,0,0,0.1);
+  background:white;
+  color:var(--black);
+}
+button{
+  padding:8px 14px;
+  border-radius:var(--radius);
+  border:none;
+  background:var(--gold);
+  color:#111;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* Productos estilo Destacados */
+.products{
+  max-width:var(--max);
+  margin:18px auto;
+  padding:0 18px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:24px;
+}
+.card{
+  background:white;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  transition:0.25s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.12);
+}
+.card img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+}
+.card .body{
+  padding:16px;
+}
+.card h3{
+  margin:6px 0;
+  font-size:18px;
+}
+.meta{
+  font-size:12px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.price{
+  color:var(--gold);
+  font-weight:800;
+  margin-top:8px;
+}
+.card a{
+  display:inline-block;
+  margin-top:10px;
+  text-decoration:none;
+  font-weight:700;
+  color:var(--black);
+}
+.add-cart{
+  display:block;
+  margin-top:10px;
+  padding:8px 12px;
+  background:#1e90ff;
+  color:white;
+  text-align:center;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* Mensaje vacío */
+.empty-msg{
+  text-align:center;
+  opacity:0.6;
+  font-size:16px;
+  padding:40px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="inner">
+    <strong>PERFUMERÍA DUBAI PERU</strong>
+    <nav>
+      <a href="index.html">
+        <img src="https://cdn-icons-png.flaticon.com/128/9121/9121722.png" width="30" alt="Inicio Icono">
+      </a>
+    </nav>
+  </div>
+</header>
+
+<div class="filters">
+  <label>Sexo:
+    <select id="fSexo">
+      <option value="">Todos</option>
+      <option value="Hombre">Hombre</option>
+      <option value="Mujer">Mujer</option>
+      <option value="Unisex">Unisex</option>
+    </select>
+  </label>
+
+  <label>Tipo:
+    <select id="fTipo">
+      <option value="">Todos</option>
+      <option value="Fragancia">Fragancia</option>
+      <option value="Aceite">Aceite</option>
+      <option value="Set">Set</option>
+    </select>
+  </label>
+
+  <button id="limpiar">Limpiar</button>
+</div>
+
+<section class="products" id="grid"></section>
+
+<script>
+// ------------------------------
+// Cargar productos desde LocalStorage
+// ------------------------------
+function getProducts(){
+  const raw = localStorage.getItem("sultan_products");
+  return raw ? JSON.parse(raw) : [];
+}
+
+// ------------------------------
+// Carrito
+// ------------------------------
+function getCart(){
+  const raw = localStorage.getItem("cart");
+  return raw ? JSON.parse(raw) : [];
+}
+
+function saveCart(cart){
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// pintar productos
+function renderProducts(){
+  const grid = document.getElementById("grid");
+  const sexo = document.getElementById("fSexo").value;
+  const tipo = document.getElementById("fTipo").value;
+
+  let list = getProducts();
+  if(sexo) list = list.filter(p => p.sexo === sexo);
+  if(tipo) list = list.filter(p => p.cat === tipo);
+
+  if(list.length===0){
+    grid.innerHTML = "<p class='empty-msg'>No hay productos que coincidan</p>";
+    return;
+  }
+
+  grid.innerHTML = "";
+  list.forEach(p=>{
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <img src="${p.image}" alt="${p.name}">
+      <div class="body">
+        <div class="meta">${p.cat} · ${p.sexo}</div>
+        <h3>${p.name}</h3>
+        <div class="price">S/${p.price}</div>
+        <a href="producto.html?id=${p.id}">Ver producto</a>
+        <span class="add-cart" 
+          data-id="${p.id}" 
+          data-name="${p.name}" 
+          data-price="${p.price}" 
+          data-image="${p.image}">
+          Agregar al carrito
+        </span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // agregar al carrito
+  document.querySelectorAll(".add-cart").forEach(btn=>{
+    btn.onclick = ()=>{
+      const cart = getCart();
+      const id = btn.dataset.id;
+      const index = cart.findIndex(x=>x.id==id);
+      if(index!==-1){
+        cart[index].qty++;
+      } else {
+        cart.push({
+          id: id,
+          name: btn.dataset.name,
+          price: parseFloat(btn.dataset.price),
+          image: btn.dataset.image,
+          qty: 1
+        });
+      }
+      saveCart(cart);
+      alert(`${btn.dataset.name} agregado al carrito!`);
+    };
+  });
+}
+
+// filtros
+document.getElementById("fSexo").onchange = renderProducts;
+document.getElementById("fTipo").onchange = renderProducts;
+document.getElementById("limpiar").onclick = ()=>{
+  document.getElementById("fSexo").value = "";
+  document.getElementById("fTipo").value = "";
+  renderProducts();
+};
+
+// iniciar
+renderProducts();
+</script>
+
+</body>
+</html>
+

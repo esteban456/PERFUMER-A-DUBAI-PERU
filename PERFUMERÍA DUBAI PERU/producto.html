@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Producto - SULTAN ESSENCE</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0b0b0b;
+  --gold:#C7A008;
+  --gold-soft:#f2d78c;
+  --ivory:#F8F5EF;
+  --muted:#bfb7a6;
+  --max:1100px;
+  --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#080808 0%, #0f0f0f 100%);color:var(--ivory);min-height:100vh}
+
+/* Header */
+.header{background:var(--black);position:sticky;top:0;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+.header .inner{max-width:var(--max);margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,var(--gold),#f4d96b);border:2px solid rgba(199,160,8,0.12)}
+.logo img{width:100%;height:100%;object-fit:cover}
+.brand h1{font-family:Cinzel,serif;color:var(--ivory);font-size:18px;letter-spacing:1px;margin:0}
+
+/* Main layout */
+.container{max-width:var(--max);margin:28px auto;padding:0 18px}
+.product{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.img-wrap{background:#070707;padding:12px;border-radius:12px;border:1px solid rgba(199,160,8,0.04)}
+.img-wrap img{width:100%;height:420px;object-fit:cover;border-radius:8px}
+
+/* Info */
+.info{padding:8px 6px;display:flex;flex-direction:column;gap:12px}
+.info h2{font-family:Cinzel;color:var(--gold);margin:0}
+.price{color:var(--gold);font-weight:800;font-size:20px}
+.meta{color:var(--muted);font-size:13px;text-transform:uppercase}
+.description{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:var(--ivory)}
+
+/* Buttons */
+.actions{display:flex;gap:12px;align-items:center}
+.btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:800}
+.btn-gold{background:linear-gradient(180deg,var(--gold),var(--gold-soft));color:#111}
+.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--ivory)}
+
+/* Responsive */
+@media(max-width:900px){
+  .product{grid-template-columns:1fr;gap:14px}
+  .img-wrap img{height:300px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="inner">
+    <div class="brand">
+      <div class="logo"><img src="logo.jpg" alt="logo"></div>
+      <h1>SULTAN ESSENCE</h1>
+    </div>
+    <nav><a href="index.html" style="color:var(--ivory);text-decoration:none">Inicio</a></nav>
+  </div>
+</header>
+
+<main class="container">
+  <div id="product" class="product">
+    <!-- js/producto.js debe llenar este contenedor -->
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/producto.js"></script>
+</body>
+</html>
