@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -109,8 +107,42 @@ body{font-family:Inter,Arial,sans-serif;background:#0b0b0b;color:var(--ivory);mi
 }
 #cerrarYape img{width:28px;height:28px}
 
-@media(max-width:900px){
+/* ===== RESPONSIVE ===== */
+@media (max-width:900px){
+  .container{padding:12px}
   .cart-table th:nth-child(1), .cart-table td:nth-child(1){display:none}
+}
+
+/* Mobile: convertir filas en tarjetas */
+@media (max-width:700px){
+  .cart-table, .cart-table thead, .cart-table tbody, .cart-table th, .cart-table td, .cart-table tr {
+    display:block;
+  }
+  .cart-table thead { display:none; }
+  .cart-table tr{
+    margin-bottom:12px;
+    background:#0f0f0f;
+    padding:12px;
+    border-radius:10px;
+  }
+  .cart-table td{
+    border:none;
+    padding:6px 0;
+  }
+  .product-name{align-items:flex-start}
+  .product-thumb{width:86px;height:86px}
+  .qty-input{width:100%;max-width:140px}
+  .total-box{flex-direction:column;align-items:flex-start;gap:8px}
+  .btn-yape, #deleteSelected{width:100%;justify-content:center}
+}
+
+/* Ajustes pequeños para muy pequeño */
+@media (max-width:420px){
+  .logo{width:44px;height:44px}
+  .brand h1{font-size:16px}
+  .product-thumb{width:76px;height:76px}
+  .btn-yape{font-size:15px;padding:10px}
+  #deleteSelected{font-size:15px;padding:10px}
 }
 </style>
 </head>
@@ -252,4 +284,3 @@ renderCart();
 
 </body>
 </html>
-
