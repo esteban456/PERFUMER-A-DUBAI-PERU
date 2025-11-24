@@ -71,6 +71,27 @@ button{
 .alert.error{background:#fee9d0;color:#5a3b00}
 .row{display:flex;gap:12px;flex-wrap:wrap}
 .col{flex:1;min-width:220px}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width:900px){
+  body{padding:14px;}
+  .box{padding:18px;border-radius:10px}
+  .row{flex-direction:column}
+  .item{flex-direction:row;gap:12px}
+  .item img{width:56px;height:56px}
+  .col{min-width:unset}
+  h1{font-size:20px}
+  button{padding:10px 12px}
+}
+
+@media (max-width:480px){
+  .item{flex-direction:column;align-items:flex-start}
+  .item img{width:100%;height:auto;max-height:160px;object-fit:cover;border-radius:8px}
+  .actions{display:flex;gap:8px;width:100%;justify-content:flex-end;margin-top:8px}
+  .actions button{flex:1}
+  .row{gap:10px}
+  .box{padding:14px}
+}
 </style>
 </head>
 
@@ -78,7 +99,7 @@ button{
 
 <div class="box">
 
-  <div style="display:flex;justify-content:space-between;align-items:center">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
     <h1>Panel de Administración</h1>
     <div style="display:flex;gap:10px;align-items:center">
       <button onclick="logout()">Cerrar sesión</button>
@@ -125,14 +146,14 @@ button{
       <div class="small-note">Si subes archivo se usará como imagen (convertida a Base64). Si no, se usará la URL.</div>
 
       <!-- NUEVO: Checkbox destacado -->
-      <label>
+      <label style="margin-top:8px;">
         <input type="checkbox" id="p_destacado">
         Producto destacado
       </label>
     </div>
   </div>
 
-  <div style="display:flex;gap:12px;margin-top:12px">
+  <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
     <button id="saveBtn" onclick="addOrUpdateProduct()">Guardar producto</button>
     <button id="clearBtn" style="background:#444;color:white" onclick="resetForm()">Limpiar</button>
   </div>
@@ -200,7 +221,7 @@ function renderProducts(){
         <div style="margin-top:6px;color:#ccc;font-size:13px">${p.desc ? (p.desc.length>120 ? p.desc.slice(0,120)+'…' : p.desc) : ''}</div>
         ${p.destacado ? '<div style="color:#f2d78c;font-size:13px;margin-top:4px">★ Destacado</div>' : ''}
       </div>
-      <div class="actions">
+      <div class="actions" style="display:flex;gap:8px;align-items:center">
         <button onclick="startEdit('${p.id}')" style="background:#333;color:white;padding:8px;border-radius:8px">Editar</button>
         <button onclick="removeProduct('${p.id}')" style="background:#a11;color:white;padding:8px;border-radius:8px">Eliminar</button>
       </div>
@@ -305,4 +326,3 @@ renderProducts();
 
 </body>
 </html>
-
