@@ -21,20 +21,20 @@ body{
   color:var(--ivory);
   min-height:100vh;
   display:flex;
-  justify-content:center;
+  flex-direction:column;
+  justify-content:flex-start;
   align-items:center;
   padding:20px;
 }
 
-/* Header centrado */
 .header{
   width:100%;
-  max-width:460px;
-  margin-bottom:20px;
+  margin-top:20px;
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
+  margin-bottom:30px;
 }
 .header .logo{
   width:80px;
@@ -46,18 +46,13 @@ body{
   margin-bottom:12px;
 }
 .header .logo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  width:100%;height:100%;object-fit:cover;
 }
-.header h{
-  font-family:Cinzel,serif;
-  color:var(--ivory);
-  font-size:20px;
-  letter-spacing:1px;
+.header h1{
+  font-family:Cinzel;
+  font-size:22px;
 }
 
-/* Card */
 .card{
   width:100%;
   max-width:460px;
@@ -65,6 +60,7 @@ body{
   padding:28px;
   border-radius:var(--radius);
   box-shadow:0 12px 30px rgba(0,0,0,0.6);
+  margin-bottom:40px;
 }
 .card h2{
   font-family:Cinzel;
@@ -81,7 +77,6 @@ input{
   background:#121212;
   color:var(--ivory);
   margin-top:10px;
-  font-size:15px;
 }
 
 button{
@@ -102,11 +97,7 @@ button{
   text-align:center;
   margin-top:12px;
 }
-.small a{
-  color:var(--gold);
-  text-decoration:none;
-  font-weight:700;
-}
+.small a{color:var(--gold);font-weight:700}
 
 .alert{
   margin-top:12px;
@@ -118,12 +109,18 @@ button{
 
 .alert.success{background:#e6f9ea;color:#1b6b2a;}
 .alert.error{background:#fee9d0;color:#5a3b00;}
+
+@media(max-width:480px){
+  body{padding:15px}
+  .card{padding:22px}
+}
 </style>
 </head>
+
 <body>
 
 <div class="header">
-  <div class="logo"><img src="logo.png" alt="logo"></div>
+  <div class="logo"><img src="logo.png"></div>
   <h1>PERFUMERÍA DUBAI PERU</h1>
 </div>
 
@@ -164,6 +161,6 @@ document.getElementById("regBtn").addEventListener("click", () => {
   }
 });
 </script>
+
 </body>
 </html>
-
