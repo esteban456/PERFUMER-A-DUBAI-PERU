@@ -142,6 +142,29 @@ button{
   font-size:16px;
   padding:40px 0;
 }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width:1000px){
+  .products{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
+  .header .inner{padding:0 18px}
+  .filters{padding:0 12px}
+}
+
+@media (max-width:700px){
+  .products{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+  .card img{aspect-ratio:3/2;height:auto}
+  .card .body{padding:12px}
+  .card h3{font-size:16px}
+  .filters{flex-direction:column;align-items:stretch;gap:10px;padding:0 12px}
+  select, button{width:100%}
+}
+
+@media (max-width:420px){
+  body{font-size:14px}
+  .products{gap:10px}
+  .card{border-radius:12px}
+  .header strong{font-size:18px}
+}
 </style>
 </head>
 
@@ -280,4 +303,3 @@ renderProducts();
 
 </body>
 </html>
-
