@@ -264,419 +264,16 @@ body{
 @media (max-width:420px){
   .hero h2{font-size:28px}
   .hero{height:46vh}
-
   .card img{height:160px}
   .products{gap:10px}
-
   .brand h1{font-size:16px}
 
-  /* Íconos más grandes para que no desaparezcan */
   .nav a img{
     width:28px !important;
     height:28px !important;
   }
 
-  .nav{
-    gap:14px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header class="header">
- <div class="inner">
-  <div class="brand">
-   <div class="logo"><img src="logo.png" alt="logo"></div>
-   <h1>PERFUMERÍA DUBAI PERU</h1>
-  </div>
-
-  <nav class="nav">
-   <a href="index.html"><img src="https://cdn-icons-png.flaticon.com/128/14026/14026296.png"></a>
-   <a href="catalogo.html"><img src="https://cdn-icons-png.flaticon.com/128/10389/10389881.png"></a>
-   <a id="loginBtn" href="login.html"><img src="https://cdn-icons-png.flaticon.com/128/1828/1828395.png"></a>
-   <a href="carrito.html"><img src="https://cdn-icons-png.flaticon.com/128/3514/3514491.png"></a>
-  </nav>
- </div>
-</header>
-
-<section class="hero fade-scroll">
- <div class="content">
-  <h2>PERFUMERÍA DUBAI PERU</h2>
-  <p>PERFUMERÍA ÁRABE,  DE DISEÑADOR Y NICHO</p>
-  <a class="cta" href="catalogo.html">Explorar Catálogo</a>
- </div>
-</section>
-
-<section class="section fade-scroll">
- <h2>Productos Destacados</h2>
- <div class="products" id="destacados"></div>
-</section>
-
-<section class="section fade-scroll">
- <h2>Sobre Nosotros</h2>
-
- <div class="sobre fade-scroll">
- En <b>Perfumería Dubai Perú</b> ofrecemos <b>Perfumería Árabe, de Diseñador y de Nicho</b>, cuidando cada detalle para brindar una experiencia única.  
- <br><br>
- No solo vendemos perfumes: también brindamos <b>asesoría personalizada</b> para ayudar a cada cliente a elegir la fragancia ideal según la ocasión.  
- <br><br>
- Nuestro objetivo es que cada persona eleve su conocimiento sobre perfumes, entendiendo los aromas, su duración y el uso adecuado para el día, la noche y eventos especiales.
- </div>
-</section>
-
-<footer class="footer">© 2025 PERFUMERÍA DUBAI PERU — Todos los derechos reservados.</footer>
-
-<!-- ===== BOTÓN WHATSAPP ===== -->
-<a href="https://wa.me/51987459700" class="whatsapp-btn" target="_blank">
- <img src="https://imgs.search.brave.com/4pKJg98gke7qKUrdJjLkcq0I5e7irzDqLdNn-xtxqag/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMTM4NC8xMzg0/MDU1LnBuZw" alt="WhatsApp">
-</a>
-
-<script>
-/* ===== COMPROBAR SESIÓN ===== */
-function checkLogin(){
-  const user = localStorage.getItem("session_user");
-  const loginBtn = document.getElementById("loginBtn");
-
-  if(user){
-    loginBtn.innerHTML = "🚪";
-    loginBtn.href = "#";
-    loginBtn.onclick = () => {
-      localStorage.removeItem("session_user");
-      alert("Sesión cerrada");
-      location.reload();
-    };
-  }
-}
-checkLogin();
-
-/* ===== PRODUCTOS ===== */
-function getProducts(){
- const raw = localStorage.getItem("sultan_products");
- return raw ? JSON.parse(raw) : [];
-}
-
-function renderDestacados(){
- const container = document.getElementById("destacados");
- const list = getProducts().filter(p => p.destacado);
-
- if(list.length === 0){
-   container.innerHTML = "<p style='opacity:0.6'>No hay productos destacados</p>";
-   return;
- }
-
- container.innerHTML = '';
-
- list.forEach(p => {
-   const card = document.createElement('div');
-   card.className = 'card fade-scroll';
-   card.innerHTML = `
-     <img src="${p.image}">
-     <div class="body">
-       <div class="meta">${p.cat} · ${p.sexo}</div>
-       <h3>${p.name}</h3>
-       <div class="price">S/${p.price}</div>
-     </div>`;
-   container.appendChild(card);
- });
-}
-renderDestacados();
-
-/* ===== ANIMACIÓN scroll ===== */
-const observer = new IntersectionObserver(entries=>{
- entries.forEach(entry=>{
-  if(entry.isIntersecting){
-    entry.target.classList.add("visible");
- }
- });
-});
-document.querySelectorAll(".fade-scroll").forEach(el=>observer.observe(el));
-
-</script>
-
-</body>
-</html><!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PERFUMERÍA DUBAI PERU</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-/* ====== ESTILOS ====== */
-:root{
- --black:#0b0b0b;
- --gold:#c7a008;
- --gold-light:#f2d78c;
- --ivory:#f7f3e8;
- --muted:#7e7e7e;
- --radius:14px;
- --max:1200px;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-body{
- background:var(--ivory);
- font-family:Inter,Arial,sans-serif;
- color:var(--black);
- -webkit-font-smoothing:antialiased;
- animation: fadeBody 0.8s ease-in-out;
-}
-
-@keyframes fadeBody { from{opacity:0;} to{opacity:1;} }
-
-.fade-scroll{
- opacity:0;
- transform:translateY(25px);
- transition:all 0.8s ease;
-}
-.fade-scroll.visible{opacity:1;transform:translateY(0)}
-
-.header{
- width:100%;
- background:var(--black);
- padding:14px 30px;
- position:sticky;
- top:0;
- z-index:50;
- box-shadow:0 4px 12px rgba(0,0,0,0.4);
-}
-
-.header .inner{
- max-width:var(--max);
- margin:auto;
- display:flex;
- justify-content:space-between;
- align-items:center;
-}
-
-.brand{
- display:flex;
- align-items:center;
- gap:14px;
-}
-.logo{
- width:52px;
- height:52px;
- border-radius:12px;
- overflow:hidden;
- background:var(--gold);
- border:2px solid var(--gold-light);
-}
-.logo img{
- width:100%;
- height:100%;
- object-fit:cover;
-}
-
-.brand h1{
- font-family:Cinzel;
- font-size:22px;
- color:white;
- letter-spacing:2px;
- text-transform:uppercase;
-}
-
-.nav{
- display:flex;
- align-items:center;
- gap:22px;
-}
-
-.nav a{
- width:30px;
- height:30px;
- display:flex;
- align-items:center;
- justify-content:center;
- border-bottom:2px solid transparent;
- transition:0.25s;
-}
-
-.nav a img{
- width:26px;
- height:26px;
- filter:brightness(0) invert(1);
- transition:0.25s;
-}
-
-.nav a:hover img{ filter:brightness(1) saturate(2); }
-.nav a:hover{ border-bottom:2px solid var(--gold-light); }
-
-.hero{
- height:80vh;
- background:url('https://media.gettyimages.com/id/916194640/photo/african-american-woman-spraying-perfume-on-wrist.jpg?s=612x612&w=0&k=20&c=_UfxL_pR4ImfS7tvUSHTtUrLXYhPB-74h79GqnU0fe0=');
- background-size:cover;
- background-position:center;
- position:relative;
- display:flex;
- align-items:center;
- justify-content:center;
- text-align:center;
-}
-
-.hero::after{
- content:"";
- position:absolute;
- inset:0;
- background:rgba(0,0,0,0.55);
-}
-
-.hero .content{
- position:relative;
- z-index:10;
- color:white;
-}
-
-.hero h2{
- font-family:Cinzel;
- font-size:64px;
- color:var(--gold);
- margin-bottom:10px;
- letter-spacing:2px;
-}
-
-.hero p{
- font-size:20px;
- color:#eee;
- margin-bottom:20px;
-}
-
-.cta{
- background:var(--gold);
- padding:12px 20px;
- border-radius:10px;
- color:#111;
- font-weight:700;
- text-decoration:none;
- font-size:16px;
- transition:0.25s;
-}
-
-.section{
- max-width:var(--max);
- margin:40px auto;
- padding:0 20px;
-}
-
-.section h2{
- font-family:Cinzel;
- font-size:32px;
- margin-bottom:20px;
-}
-
-.products{
- display:grid;
- grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
- gap:24px;
-}
-
-.card{
- background:white;
- border-radius:var(--radius);
- overflow:hidden;
- box-shadow:0 6px 20px rgba(0,0,0,0.08);
- transition:0.35s;
-}
-.card:hover{
- transform:translateY(-8px);
- box-shadow:0 12px 28px rgba(0,0,0,0.12);
-}
-
-.card img{width:100%;height:260px;object-fit:cover}
-
-.card .body{padding:16px;}
-
-.meta{font-size:12px;color:var(--muted);text-transform:uppercase;}
-
-.card h3{margin:6px 0;font-size:18px;}
-
-.price{color:var(--gold);font-weight:800;margin-top:8px;}
-
-.sobre{
- background:white;
- padding:30px;
- border-radius:var(--radius);
- box-shadow:0 6px 20px rgba(0,0,0,0.08);
- line-height:1.6;
-}
-
-.footer{
- background:#111;
- color:#ccc;
- text-align:center;
- padding:22px;
- margin-top:40px;
-}
-
-/* ===== BOTÓN DE WHATSAPP ===== */
-
-.whatsapp-btn{
- position: fixed;
- bottom: 20px;
- right: 20px;
- width: 65px;
- height: 65px;
- background: #25D366;
- border-radius: 50%;
- display: flex;
- align-items: center;
- justify-content: center;
- box-shadow: 0 4px 12px rgba(0,0,0,0.3);
- z-index: 999;
- transition: transform .25s;
-}
-.whatsapp-btn img{
- width: 38px;
- height: 38px;
-}
-.whatsapp-btn:hover{
- transform: scale(1.12);
-}
-
-/* ====== RESPONSIVE ====== */
-@media (max-width:1100px){
-  .hero h2{font-size:48px}
-  .hero{height:65vh}
-  .products{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
-}
-
-@media (max-width:800px){
-  .header .inner{padding:0 16px}
-  .hero{height:56vh;background-position:center 30%}
-  .hero h2{font-size:40px}
-  .hero p{font-size:16px}
-  .brand h1{font-size:18px}
   .nav{gap:14px}
-  .products{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-  .card img{height:200px}
-  .cta{padding:10px 14px}
-  .whatsapp-btn{width:58px;height:58px;bottom:16px;right:14px}
-  .whatsapp-btn img{width:34px;height:34px}
-}
-
-/* 🔥 CARRITO VISIBLE EN CELULAR 🔥 */
-@media (max-width:420px){
-  .hero h2{font-size:28px}
-  .hero{height:46vh}
-
-  .card img{height:160px}
-  .products{gap:10px}
-
-  .brand h1{font-size:16px}
-
-  /* Íconos más grandes para que no desaparezcan */
-  .nav a img{
-    width:28px !important;
-    height:28px !important;
-  }
-
-  .nav{
-    gap:14px;
-  }
 }
 </style>
 </head>
@@ -702,7 +299,7 @@ body{
 <section class="hero fade-scroll">
  <div class="content">
   <h2>PERFUMERÍA DUBAI PERU</h2>
-  <p>PERFUMERÍA ÁRABE,  DE DISEÑADOR Y NICHO</p>
+  <p>PERFUMERÍA ÁRABE, DE DISEÑADOR Y NICHO</p>
   <a class="cta" href="catalogo.html">Explorar Catálogo</a>
  </div>
 </section>
@@ -726,13 +323,12 @@ body{
 
 <footer class="footer">© 2025 PERFUMERÍA DUBAI PERU — Todos los derechos reservados.</footer>
 
-<!-- ===== BOTÓN WHATSAPP ===== -->
+<!-- BOTÓN WHATSAPP -->
 <a href="https://wa.me/51987459700" class="whatsapp-btn" target="_blank">
  <img src="https://imgs.search.brave.com/4pKJg98gke7qKUrdJjLkcq0I5e7irzDqLdNn-xtxqag/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMTM4NC8xMzg0/MDU1LnBuZw" alt="WhatsApp">
 </a>
 
 <script>
-/* ===== COMPROBAR SESIÓN ===== */
 function checkLogin(){
   const user = localStorage.getItem("session_user");
   const loginBtn = document.getElementById("loginBtn");
@@ -749,7 +345,6 @@ function checkLogin(){
 }
 checkLogin();
 
-/* ===== PRODUCTOS ===== */
 function getProducts(){
  const raw = localStorage.getItem("sultan_products");
  return raw ? JSON.parse(raw) : [];
@@ -781,7 +376,6 @@ function renderDestacados(){
 }
 renderDestacados();
 
-/* ===== ANIMACIÓN scroll ===== */
 const observer = new IntersectionObserver(entries=>{
  entries.forEach(entry=>{
   if(entry.isIntersecting){
