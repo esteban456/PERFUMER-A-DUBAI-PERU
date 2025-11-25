@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* ====== ESTILOS ====== */
 :root{
  --black:#0b0b0b;
  --gold:#c7a008;
@@ -170,6 +169,15 @@ body{
  margin-bottom:20px;
 }
 
+.block{
+ background:white;
+ padding:26px;
+ border-radius:var(--radius);
+ box-shadow:0 6px 20px rgba(0,0,0,0.08);
+ line-height:1.6;
+ margin-bottom:24px;
+}
+
 .products{
  display:grid;
  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
@@ -198,14 +206,6 @@ body{
 
 .price{color:var(--gold);font-weight:800;margin-top:8px;}
 
-.sobre{
- background:white;
- padding:30px;
- border-radius:var(--radius);
- box-shadow:0 6px 20px rgba(0,0,0,0.08);
- line-height:1.6;
-}
-
 .footer{
  background:#111;
  color:#ccc;
@@ -214,37 +214,7 @@ body{
  margin-top:40px;
 }
 
-/* ===== SECCIÓN PRESENTACIÓN ===== */
-.presentacion{
- background:white;
- padding:30px;
- border-radius:var(--radius);
- box-shadow:0 6px 20px rgba(0,0,0,0.08);
- line-height:1.7;
- margin-top:20px;
-}
-
-.presentacion h3{
- font-family:Cinzel;
- font-size:26px;
- margin-top:25px;
- color:var(--gold);
-}
-
-.presentacion p, .presentacion li{
- font-size:16px;
- margin:10px 0;
-}
-
-.presentacion ul{
- padding-left:18px;
-}
-
-.presentacion li{
- margin-bottom:8px;
-}
-
-/* ===== BOTÓN DE WHATSAPP ===== */
+/* WHATSAPP */
 .whatsapp-btn{
  position: fixed;
  bottom: 20px;
@@ -268,13 +238,22 @@ body{
  transform: scale(1.12);
 }
 
-/* ====== RESPONSIVE ====== */
-@media (max-width:800px){
-  .hero h2{font-size:40px}
-  .presentacion h3{font-size:22px}
-  .presentacion p{font-size:14px}
+/* RESPONSIVE */
+@media (max-width:1100px){
+  .hero h2{font-size:48px}
+  .hero{height:65vh}
 }
 
+@media (max-width:800px){
+  .header .inner{padding:0 16px}
+  .hero{height:56vh;background-position:center 30%}
+  .hero h2{font-size:40px}
+}
+
+@media (max-width:420px){
+  .hero h2{font-size:28px}
+  .hero{height:46vh}
+}
 </style>
 </head>
 
@@ -309,117 +288,78 @@ body{
  <div class="products" id="destacados"></div>
 </section>
 
+<!-- QUIÉNES SOMOS -->
 <section class="section fade-scroll">
- <h2>Sobre Nosotros</h2>
-
- <div class="sobre">
- En <b>Perfumería Dubai Perú</b> ofrecemos <b>Perfumería Árabe, de Diseñador y de Nicho</b>, cuidando cada detalle para brindar una experiencia única.  
- <br><br>
- No solo vendemos perfumes: también brindamos <b>asesoría personalizada</b> para ayudar a cada cliente a elegir la fragancia ideal según la ocasión.  
- <br><br>
- Nuestro objetivo es que cada persona eleve su conocimiento sobre perfumes, entendiendo los aromas, su duración y el uso adecuado para el día, la noche y eventos especiales.
+ <h2>Quiénes Somos</h2>
+ <div class="block">
+   Somos una perfumería especializada en fragancias exclusivas, enfocada en ofrecer experiencias sensoriales únicas.
+   Combinamos calidad, elegancia y un servicio personalizado para cada cliente.
  </div>
 </section>
 
-<!-- ========================= -->
-<!--   SECCIÓN PRESENTACIÓN   -->
-<!-- ========================= -->
-
+<!-- MISIÓN -->
 <section class="section fade-scroll">
- <h2>Presentación de la Perfumería</h2>
-
- <div class="presentacion">
-
-  <h3>Diapositiva 1 – Portada</h3>
-  <p><b>Perfumería “Esencia Bella”</b><br>La fragancia que te inspira</p>
-
-  <h3>Diapositiva 2 – ¿Quiénes somos?</h3>
-  <p>
-   Somos una perfumería especializada en fragancias exclusivas, enfocada en ofrecer experiencias sensoriales únicas.
-   Combinamos calidad, elegancia y un servicio personalizado para cada cliente.
-  </p>
-
-  <h3>Diapositiva 3 – Nuestra misión</h3>
-  <p>
+ <h2>Nuestra Misión</h2>
+ <div class="block">
    Brindar perfumes de alta calidad que expresen la personalidad y estilo de nuestros clientes, ofreciendo asesoría experta y una experiencia de compra memorable.
-  </p>
+ </div>
+</section>
 
-  <h3>Diapositiva 4 – Nuestra visión</h3>
-  <p>
-   Convertirnos en la perfumería de referencia en la región, reconocida por la excelencia, exclusividad y autenticidad de nuestras fragancias.
-  </p>
+<!-- VALORES -->
+<section class="section fade-scroll">
+ <h2>Nuestros Valores</h2>
+ <div class="block">
+   <ul style="margin-left:14px;">
+     <li><b>Calidad:</b> Fragancias seleccionadas con estándares premium.</li>
+     <li><b>Elegancia:</b> Productos y presentación sofisticada.</li>
+     <li><b>Servicio:</b> Atención personalizada y cercana.</li>
+     <li><b>Autenticidad:</b> Perfumes originales garantizados.</li>
+   </ul>
+ </div>
+</section>
 
-  <h3>Diapositiva 5 – Nuestros valores</h3>
-  <ul>
-   <li><b>Calidad:</b> Fragancias seleccionadas con estándares premium.</li>
-   <li><b>Elegancia:</b> Productos y entorno de compra sofisticados.</li>
-   <li><b>Servicio:</b> Atención personalizada y cercana.</li>
-   <li><b>Autenticidad:</b> Perfumes originales y de marcas reconocidas.</li>
-  </ul>
+<!-- ASESORÍA -->
+<section class="section fade-scroll">
+ <h2>Asesoría Personalizada</h2>
+ <div class="block">
+   Ofrecemos recomendaciones según notas olfativas, personalidad, clima, ocasión (día, noche, trabajo o eventos especiales).
+ </div>
+</section>
 
-  <h3>Diapositiva 6 – Categorías de productos</h3>
-  <ul>
-   <li>Perfumes importados</li>
-   <li>Perfumes artesanales / autor</li>
-   <li>Fragancias unisex</li>
-   <li>Sets de regalo</li>
-   <li>Difusores, velas y aromas para el hogar</li>
-  </ul>
+<!-- PROCESO -->
+<section class="section fade-scroll">
+ <h2>Proceso de Selección</h2>
+ <div class="block">
+   1. Presentación de notas principales<br>
+   2. Prueba en tiras olfativas<br>
+   3. Prueba en piel<br>
+   4. Recomendación final<br>
+ </div>
+</section>
 
-  <h3>Diapositiva 7 – Asesoría personalizada</h3>
-  <ul>
-   <li>Notas olfativas</li>
-   <li>Personalidad</li>
-   <li>Estación del año</li>
-   <li>Ocasión de uso (diario, trabajo, noche, eventos especiales)</li>
-  </ul>
+<!-- MARCAS -->
+<section class="section fade-scroll">
+ <h2>Marcas Destacadas</h2>
+ <div class="block">
+   Dior · Chanel · Carolina Herrera · Versace · Paco Rabanne · Marcas artesanales exclusivas
+ </div>
+</section>
 
-  <h3>Diapositiva 8 – Proceso de selección</h3>
-  <ol>
-   <li>Presentación de notas principales</li>
-   <li>Prueba en tiras olfativas</li>
-   <li>Prueba en piel</li>
-   <li>Recomendación final</li>
-  </ol>
+<!-- PROMOCIONES -->
+<section class="section fade-scroll">
+ <h2>Promociones y Beneficios</h2>
+ <div class="block">
+   Programa de fidelidad · Rebajas · Muestras · Regalos por compra · Envíos rápidos
+ </div>
+</section>
 
-  <h3>Diapositiva 9 – Marcas destacadas</h3>
-  <ul>
-   <li>Dior</li>
-   <li>Chanel</li>
-   <li>Carolina Herrera</li>
-   <li>Versace</li>
-   <li>Paco Rabanne</li>
-   <li>Fragancias artesanales exclusivas</li>
-  </ul>
-
-  <h3>Diapositiva 10 – Promociones y beneficios</h3>
-  <ul>
-   <li>Programa de fidelidad</li>
-   <li>Rebajas estacionales</li>
-   <li>Muestras gratuitas</li>
-   <li>Regalos por compra</li>
-   <li>Envíos a domicilio</li>
-  </ul>
-
-  <h3>Diapositiva 11 – Testimonios</h3>
-  <ul>
-   <li>“Excelentes fragancias y atención impecable.”</li>
-   <li>“Siempre encuentro perfumes auténticos y de larga duración.”</li>
-   <li>“Me encanta la asesoría personalizada.”</li>
-  </ul>
-
-  <h3>Diapositiva 12 – Contacto</h3>
-  <p>
-   <b>Perfumería Esencia Bella</b><br>
-   Dirección: (colocar dirección)<br>
-   Teléfono: (número)<br>
-   Redes sociales: Instagram, Facebook, TikTok<br>
-   Correo: (email)
-  </p>
-
-  <h3>Diapositiva 13 – Cierre</h3>
-  <p>✨ Gracias por su atención — Descubre tu esencia con nosotros ✨</p>
-
+<!-- TESTIMONIOS -->
+<section class="section fade-scroll">
+ <h2>Testimonios</h2>
+ <div class="block">
+   “Excelentes fragancias y atención impecable.”<br>
+   “Perfumes auténticos y de larga duración.”<br>
+   “La asesoría fue perfecta para elegir mi fragancia.”<br>
  </div>
 </section>
 
@@ -485,7 +425,6 @@ const observer = new IntersectionObserver(entries=>{
  });
 });
 document.querySelectorAll(".fade-scroll").forEach(el=>observer.observe(el));
-
 </script>
 
 </body>
