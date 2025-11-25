@@ -8,7 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* ====== ESTILOS ====== */
+
+/* ===== VARIABLES ===== */
 :root{
  --black:#0b0b0b;
  --gold:#c7a008;
@@ -19,14 +20,21 @@
  --max:1200px;
 }
 
+/* ===== BASE ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 body{
  background:var(--ivory);
  font-family:Inter,Arial,sans-serif;
  color:var(--black);
+ -webkit-font-smoothing:antialiased;
+ animation: fadeBody 0.8s ease-in-out;
 }
+@keyframes fadeBody { from{opacity:0;} to{opacity:1;} }
 
-/* ==== HEADER ==== */
+.fade-scroll{ opacity:0; transform:translateY(25px); transition:all 0.8s ease; }
+.fade-scroll.visible{opacity:1;transform:translateY(0)}
+
+/* ===== HEADER ===== */
 .header{
  width:100%;
  background:var(--black);
@@ -36,6 +44,7 @@ body{
  z-index:50;
  box-shadow:0 4px 12px rgba(0,0,0,0.4);
 }
+
 .header .inner{
  max-width:var(--max);
  margin:auto;
@@ -43,6 +52,7 @@ body{
  justify-content:space-between;
  align-items:center;
 }
+
 .brand{
  display:flex;
  align-items:center;
@@ -57,6 +67,7 @@ body{
  border:2px solid var(--gold-light);
 }
 .logo img{width:100%;height:100%;object-fit:cover}
+
 .brand h1{
  font-family:Cinzel;
  font-size:22px;
@@ -64,89 +75,105 @@ body{
  letter-spacing:2px;
  text-transform:uppercase;
 }
-.nav{display:flex;align-items:center;gap:22px}
+
+.nav{
+ display:flex;
+ align-items:center;
+ gap:22px;
+}
 .nav a img{
- width:26px;height:26px;
+ width:26px;
+ height:26px;
  filter:brightness(0) invert(1);
  transition:0.25s;
 }
+.nav a:hover img{ filter:brightness(1) saturate(2); }
 
-/* ==== HERO ==== */
+
+/* ===== HERO con animación, parallax y brillo ===== */
 .hero{
- height:80vh;
- background:url('https://media.gettyimages.com/id/916194640/photo/african-american-woman-spraying-perfume-on-wrist.jpg') center/cover no-repeat;
- position:relative;
- display:flex;
- align-items:center;
- justify-content:center;
- text-align:center;
+  height:80vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
-.hero::after{
- content:"";position:absolute;inset:0;
- background:rgba(0,0,0,0.55);
+
+.hero-bg{
+ position:absolute;
+ inset:0;
+ background:url('https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+ filter:brightness(1.25) contrast(1.15) saturate(1.28);
+ transform:scale(1.18);
+ transition:transform 1.6s ease;
+ z-index:1;
 }
+
+.hero-overlay{
+ position:absolute;
+ inset:0;
+ background:rgba(0,0,0,0.25);
+ z-index:2;
+}
+
+.hero.loaded .hero-bg{
+ transform:scale(1);
+}
+
 .hero .content{
- position:relative;color:white;z-index:2;
+ position:relative;
+ z-index:3;
+ opacity:0;
+ transform:translateY(30px) scale(0.94);
+ transition:all 1s ease;
 }
+
+.hero.loaded .content{
+ opacity:1;
+ transform:translateY(0) scale(1);
+}
+
 .hero h2{
- font-family:Cinzel;font-size:64px;color:var(--gold);
+ font-family:Cinzel;
+ font-size:64px;
+ color:var(--gold);
+ margin-bottom:10px;
 }
 .hero p{
- font-size:20px;color:#ddd;margin-top:10px;
+ font-size:20px;
+ color:white;
+ margin-bottom:20px;
 }
+
 .cta{
- margin-top:20px;
  background:var(--gold);
- padding:12px 24px;
- display:inline-block;
+ padding:12px 20px;
  border-radius:10px;
  color:#111;
  font-weight:700;
  text-decoration:none;
  font-size:16px;
- transition:0.25s;
+ box-shadow:0 4px 12px rgba(0,0,0,0.3);
+ transition:.2s;
 }
+.cta:hover{transform:scale(1.05)}
 
-/* ==== SECCIONES ==== */
+
+/* ===== PRODUCTOS DESTACADOS ===== */
 .section{
  max-width:var(--max);
- margin:60px auto;
+ margin:40px auto;
  padding:0 20px;
 }
+
 .section h2{
  font-family:Cinzel;
- font-size:34px;
- text-align:center;
- margin-bottom:22px;
+ font-size:32px;
+ margin-bottom:20px;
 }
 
-/* ==== GRID PREMIUM ==== */
-.block-grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
- gap:26px;
-}
-.block{
- background:white;
- padding:28px;
- border-radius:var(--radius);
- box-shadow:0 6px 20px rgba(0,0,0,0.08);
- text-align:center;
- transition:.3s;
-}
-.block:hover{
- transform:translateY(-8px);
- box-shadow:0 12px 32px rgba(0,0,0,0.14);
-}
-.block img{width:56px;margin-bottom:14px}
-.block h3{
- font-family:Cinzel;
- margin-bottom:10px;
- font-size:20px;
- color:var(--gold);
-}
-
-/* ==== PRODUCTOS DESTACADOS ==== */
 .products{
  display:grid;
  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
@@ -165,18 +192,82 @@ body{
 }
 .card img{width:100%;height:260px;object-fit:cover}
 .card .body{padding:16px}
-.meta{font-size:12px;color:var(--muted)}
-.price{color:var(--gold);font-weight:800;margin-top:6px}
+.meta{font-size:12px;color:var(--muted);text-transform:uppercase}
+.price{color:var(--gold);font-weight:800;margin-top:8px}
 
-/* FOOTER */
+
+/* ===== BLOQUES INFO ===== */
+.info-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+ gap:20px;
+}
+
+.info-card{
+ background:white;
+ padding:22px;
+ border-radius:var(--radius);
+ box-shadow:0 6px 20px rgba(0,0,0,0.08);
+ transition:.3s;
+}
+.info-card:hover{transform:translateY(-6px);}
+
+
+/* ===== TESTIMONIOS ===== */
+.testimonios{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+ gap:24px;
+}
+
+.testi-card{
+ background:white;
+ padding:22px;
+ border-radius:var(--radius);
+ box-shadow:0 6px 20px rgba(0,0,0,0.1);
+ transition:.3s;
+ position:relative;
+}
+
+.testi-header{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ margin-bottom:12px;
+}
+
+.testi-header img{
+ width:55px;height:55px;border-radius:50%;
+ object-fit:cover;border:2px solid var(--gold);
+}
+
+.stars{
+ color:#ffcc00;
+ margin-bottom:10px;
+ font-size:18px;
+}
+
+.like{
+ position:absolute;
+ right:15px;
+ bottom:15px;
+ font-size:20px;
+ cursor:pointer;
+ transition:.2s;
+}
+.like:hover{transform:scale(1.2)}
+
+
+/* ===== FOOTER ===== */
 .footer{
  background:#111;color:#ccc;
  text-align:center;
- padding:24px;
+ padding:22px;
  margin-top:40px;
 }
 
-/* WHATSAPP */
+
+/* ===== WHATSAPP ===== */
 .whatsapp-btn{
  position: fixed;
  bottom: 20px;
@@ -190,7 +281,11 @@ body{
  justify-content: center;
  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
  z-index: 999;
+ transition: transform .25s;
 }
+.whatsapp-btn img{width:38px;height:38px}
+.whatsapp-btn:hover{transform:scale(1.12)}
+
 </style>
 </head>
 
@@ -199,10 +294,9 @@ body{
 <header class="header">
  <div class="inner">
   <div class="brand">
-   <div class="logo"><img src="logo.png"></div>
+   <div class="logo"><img src="logo.png" alt="logo"></div>
    <h1>PERFUMERÍA DUBAI PERU</h1>
   </div>
-
   <nav class="nav">
    <a href="index.html"><img src="https://cdn-icons-png.flaticon.com/128/14026/14026296.png"></a>
    <a href="catalogo.html"><img src="https://cdn-icons-png.flaticon.com/128/10389/10389881.png"></a>
@@ -212,72 +306,93 @@ body{
  </div>
 </header>
 
-<section class="hero">
+<!-- ================= HERO ================= -->
+<section class="hero fade-scroll" id="hero">
+ <div class="hero-bg"></div>
+ <div class="hero-overlay"></div>
+
  <div class="content">
   <h2>PERFUMERÍA DUBAI PERU</h2>
-  <p>Perfumes Árabes · Diseñador · Nicho</p>
+  <p>PERFUMERÍA ÁRABE, DE DISEÑADOR Y NICHO</p>
   <a class="cta" href="catalogo.html">Explorar Catálogo</a>
  </div>
 </section>
 
-<!-- 🔥 AQUÍ INSERTÉ LOS DESTACADOS 🔥 -->
+<!-- ================= PRODUCTOS DESTACADOS ================= -->
 <section class="section fade-scroll">
  <h2>Productos Destacados</h2>
  <div class="products" id="destacados"></div>
 </section>
 
-<!-- 🔥 NUEVA SECCIÓN PREMIUM -->
-<section class="section">
- <h2>Nuestra Esencia</h2>
+<!-- ================= BLOQUES INFO ================= -->
+<section class="section fade-scroll">
+ <h2>Sobre Nosotros</h2>
 
- <div class="block-grid">
-  <div class="block">
-   <img src="https://cdn-icons-png.flaticon.com/128/1048/1048941.png">
+ <div class="info-grid">
+  
+  <div class="info-card">
    <h3>¿Quiénes Somos?</h3>
-   <p>Especialistas en fragancias exclusivas con un enfoque completamente premium.</p>
+   <p>Somos expertos en perfumería árabe, nicho y diseñador, ofreciendo fragancias únicas y asesoría profesional.</p>
   </div>
 
-  <div class="block">
-   <img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png">
+  <div class="info-card">
    <h3>Nuestra Misión</h3>
-   <p>Guiar a cada cliente hacia la fragancia perfecta para su estilo y personalidad.</p>
+   <p>Brindar perfumes de alta calidad que reflejen estilo, personalidad y elegancia.</p>
   </div>
 
-  <div class="block">
-   <img src="https://cdn-icons-png.flaticon.com/128/747/747376.png">
-   <h3>Nuestros Valores</h3>
-   <p>Calidad, elegancia, autenticidad y atención personalizada.</p>
+  <div class="info-card">
+   <h3>Nuestra Visión</h3>
+   <p>Ser la perfumería de referencia en el mundo árabe y latinoamericano.</p>
   </div>
+
+  <div class="info-card">
+   <h3>Valores</h3>
+   <p>Calidad, Elegancia, Autenticidad y Servicio Premium.</p>
+  </div>
+
  </div>
 </section>
 
-<!-- MORE SECTIONS HERE (CATEGORÍAS, ASESORÍA, MARCAS...) -->
+<!-- ================= TESTIMONIOS ================= -->
+<section class="section fade-scroll">
+ <h2>Opiniones de Nuestros Clientes</h2>
+
+ <div class="testimonios" id="testi-box"></div>
+
+ <textarea id="opinion" placeholder="Escribe tu opinión..." style="width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-top:20px;"></textarea>
+ <button onclick="addOpinion()" style="margin-top:10px;padding:12px 20px;border:none;border-radius:10px;background:var(--gold);font-weight:700;cursor:pointer;">
+  Enviar Opinión
+ </button>
+
+</section>
 
 <footer class="footer">© 2025 PERFUMERÍA DUBAI PERU — Todos los derechos reservados.</footer>
 
-<a href="https://wa.me/51987459700" class="whatsapp-btn">
- <img src="https://cdn-icons-png.flaticon.com/128/1384/1384055.png">
+<!-- WHATSAPP -->
+<a href="https://wa.me/51987459700" class="whatsapp-btn" target="_blank">
+ <img src="https://imgs.search.brave.com/4pKJg98gke7qKUrdJjLkcq0I5e7irzDqLdNn-xtxqag/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMTM4NC8xMzg0/MDU1LnBuZw" alt="WhatsApp">
 </a>
 
 <script>
-/* LOGIN */
+
+/* ===== LOGIN ===== */
 function checkLogin(){
  const user = localStorage.getItem("session_user");
- const btn = document.getElementById("loginBtn");
+ const loginBtn = document.getElementById("loginBtn");
 
  if(user){
-   btn.innerHTML = "🚪";
-   btn.href = "#";
-   btn.onclick = ()=>{
-     localStorage.removeItem("session_user");
-     alert("Sesión cerrada");
-     location.reload();
-   };
+  loginBtn.innerHTML = "🚪";
+  loginBtn.href = "#";
+  loginBtn.onclick = () => {
+   localStorage.removeItem("session_user");
+   alert("Sesión cerrada");
+   location.reload();
+  };
  }
 }
 checkLogin();
 
-/* PRODUCTOS DESTACADOS */
+/* ===== PRODUCTOS DESTACADOS ===== */
 function getProducts(){
  const raw = localStorage.getItem("sultan_products");
  return raw ? JSON.parse(raw) : [];
@@ -288,27 +403,96 @@ function renderDestacados(){
  const list = getProducts().filter(p => p.destacado);
 
  if(list.length === 0){
-   container.innerHTML = "<p>No hay productos destacados</p>";
-   return;
+  container.innerHTML = "<p style='opacity:0.6'>No hay productos destacados</p>";
+  return;
  }
 
- container.innerHTML = "";
+ container.innerHTML = '';
 
- list.forEach(p=>{
-   const card = document.createElement("div");
-   card.className = "card";
-   card.innerHTML = `
-     <img src="${p.image}">
-     <div class="body">
-       <div class="meta">${p.cat} · ${p.sexo}</div>
-       <h3>${p.name}</h3>
-       <div class="price">S/${p.price}</div>
-     </div>
-   `;
-   container.appendChild(card);
+ list.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'card fade-scroll';
+  card.innerHTML = `
+   <img src="${p.image}">
+   <div class="body">
+    <div class="meta">${p.cat} · ${p.sexo}</div>
+    <h3>${p.name}</h3>
+    <div class="price">S/${p.price}</div>
+   </div>`;
+  container.appendChild(card);
  });
 }
 renderDestacados();
+
+/* ===== HERO ANIMACIÓN ===== */
+window.addEventListener("load", () => {
+ document.getElementById("hero").classList.add("loaded");
+});
+
+/* ===== PARALLAX ===== */
+document.addEventListener("scroll", () => {
+ const scrolled = window.scrollY * 0.15;
+ document.querySelector(".hero-bg").style.transform = `translateY(${scrolled}px) scale(1.18)`;
+});
+
+/* ===== TESTIMONIOS ===== */
+function renderTestimonios(){
+ const box = document.getElementById("testi-box");
+ const saved = JSON.parse(localStorage.getItem("opiniones") || "[]");
+
+ box.innerHTML = "";
+
+ saved.forEach((op, i)=>{
+  box.innerHTML += `
+   <div class="testi-card fade-scroll">
+     <div class="testi-header">
+      <img src="https://randomuser.me/api/portraits/women/${i+10}.jpg">
+      <div>
+        <strong>${op.nombre}</strong>
+        <div class="stars">★★★★★</div>
+      </div>
+     </div>
+     <p>${op.texto}</p>
+
+     <div class="like" onclick="likeOpinion(${i})">❤️ ${op.likes}</div>
+   </div>`;
+ });
+}
+renderTestimonios();
+
+
+function addOpinion(){
+ const text = document.getElementById("opinion").value.trim();
+ if(text.length < 3) return alert("Escribe una opinión válida.");
+
+ let arr = JSON.parse(localStorage.getItem("opiniones") || "[]");
+
+ arr.push({
+  nombre:"Cliente",
+  texto:text,
+  likes:0
+ });
+
+ localStorage.setItem("opiniones", JSON.stringify(arr));
+ document.getElementById("opinion").value = "";
+ renderTestimonios();
+}
+
+function likeOpinion(i){
+ let arr = JSON.parse(localStorage.getItem("opiniones") || "[]");
+ arr[i].likes++;
+ localStorage.setItem("opiniones", JSON.stringify(arr));
+ renderTestimonios();
+}
+
+/* ===== ANIMACIÓN scroll ===== */
+const observer = new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){ entry.target.classList.add("visible"); }
+ });
+});
+document.querySelectorAll(".fade-scroll").forEach(el=>observer.observe(el));
+
 </script>
 
 </body>
