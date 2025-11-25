@@ -214,8 +214,37 @@ body{
  margin-top:40px;
 }
 
-/* ===== BOTÓN DE WHATSAPP ===== */
+/* ===== SECCIÓN PRESENTACIÓN ===== */
+.presentacion{
+ background:white;
+ padding:30px;
+ border-radius:var(--radius);
+ box-shadow:0 6px 20px rgba(0,0,0,0.08);
+ line-height:1.7;
+ margin-top:20px;
+}
 
+.presentacion h3{
+ font-family:Cinzel;
+ font-size:26px;
+ margin-top:25px;
+ color:var(--gold);
+}
+
+.presentacion p, .presentacion li{
+ font-size:16px;
+ margin:10px 0;
+}
+
+.presentacion ul{
+ padding-left:18px;
+}
+
+.presentacion li{
+ margin-bottom:8px;
+}
+
+/* ===== BOTÓN DE WHATSAPP ===== */
 .whatsapp-btn{
  position: fixed;
  bottom: 20px;
@@ -240,41 +269,12 @@ body{
 }
 
 /* ====== RESPONSIVE ====== */
-@media (max-width:1100px){
-  .hero h2{font-size:48px}
-  .hero{height:65vh}
-  .products{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
-}
-
 @media (max-width:800px){
-  .header .inner{padding:0 16px}
-  .hero{height:56vh;background-position:center 30%}
   .hero h2{font-size:40px}
-  .hero p{font-size:16px}
-  .brand h1{font-size:18px}
-  .nav{gap:14px}
-  .products{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-  .card img{height:200px}
-  .cta{padding:10px 14px}
-  .whatsapp-btn{width:58px;height:58px;bottom:16px;right:14px}
-  .whatsapp-btn img{width:34px;height:34px}
+  .presentacion h3{font-size:22px}
+  .presentacion p{font-size:14px}
 }
 
-/* 🔥 CARRITO VISIBLE EN CELULAR 🔥 */
-@media (max-width:420px){
-  .hero h2{font-size:28px}
-  .hero{height:46vh}
-  .card img{height:160px}
-  .products{gap:10px}
-  .brand h1{font-size:16px}
-
-  .nav a img{
-    width:28px !important;
-    height:28px !important;
-  }
-
-  .nav{gap:14px}
-}
 </style>
 </head>
 
@@ -312,7 +312,7 @@ body{
 <section class="section fade-scroll">
  <h2>Sobre Nosotros</h2>
 
- <div class="sobre fade-scroll">
+ <div class="sobre">
  En <b>Perfumería Dubai Perú</b> ofrecemos <b>Perfumería Árabe, de Diseñador y de Nicho</b>, cuidando cada detalle para brindar una experiencia única.  
  <br><br>
  No solo vendemos perfumes: también brindamos <b>asesoría personalizada</b> para ayudar a cada cliente a elegir la fragancia ideal según la ocasión.  
@@ -321,11 +321,112 @@ body{
  </div>
 </section>
 
+<!-- ========================= -->
+<!--   SECCIÓN PRESENTACIÓN   -->
+<!-- ========================= -->
+
+<section class="section fade-scroll">
+ <h2>Presentación de la Perfumería</h2>
+
+ <div class="presentacion">
+
+  <h3>Diapositiva 1 – Portada</h3>
+  <p><b>Perfumería “Esencia Bella”</b><br>La fragancia que te inspira</p>
+
+  <h3>Diapositiva 2 – ¿Quiénes somos?</h3>
+  <p>
+   Somos una perfumería especializada en fragancias exclusivas, enfocada en ofrecer experiencias sensoriales únicas.
+   Combinamos calidad, elegancia y un servicio personalizado para cada cliente.
+  </p>
+
+  <h3>Diapositiva 3 – Nuestra misión</h3>
+  <p>
+   Brindar perfumes de alta calidad que expresen la personalidad y estilo de nuestros clientes, ofreciendo asesoría experta y una experiencia de compra memorable.
+  </p>
+
+  <h3>Diapositiva 4 – Nuestra visión</h3>
+  <p>
+   Convertirnos en la perfumería de referencia en la región, reconocida por la excelencia, exclusividad y autenticidad de nuestras fragancias.
+  </p>
+
+  <h3>Diapositiva 5 – Nuestros valores</h3>
+  <ul>
+   <li><b>Calidad:</b> Fragancias seleccionadas con estándares premium.</li>
+   <li><b>Elegancia:</b> Productos y entorno de compra sofisticados.</li>
+   <li><b>Servicio:</b> Atención personalizada y cercana.</li>
+   <li><b>Autenticidad:</b> Perfumes originales y de marcas reconocidas.</li>
+  </ul>
+
+  <h3>Diapositiva 6 – Categorías de productos</h3>
+  <ul>
+   <li>Perfumes importados</li>
+   <li>Perfumes artesanales / autor</li>
+   <li>Fragancias unisex</li>
+   <li>Sets de regalo</li>
+   <li>Difusores, velas y aromas para el hogar</li>
+  </ul>
+
+  <h3>Diapositiva 7 – Asesoría personalizada</h3>
+  <ul>
+   <li>Notas olfativas</li>
+   <li>Personalidad</li>
+   <li>Estación del año</li>
+   <li>Ocasión de uso (diario, trabajo, noche, eventos especiales)</li>
+  </ul>
+
+  <h3>Diapositiva 8 – Proceso de selección</h3>
+  <ol>
+   <li>Presentación de notas principales</li>
+   <li>Prueba en tiras olfativas</li>
+   <li>Prueba en piel</li>
+   <li>Recomendación final</li>
+  </ol>
+
+  <h3>Diapositiva 9 – Marcas destacadas</h3>
+  <ul>
+   <li>Dior</li>
+   <li>Chanel</li>
+   <li>Carolina Herrera</li>
+   <li>Versace</li>
+   <li>Paco Rabanne</li>
+   <li>Fragancias artesanales exclusivas</li>
+  </ul>
+
+  <h3>Diapositiva 10 – Promociones y beneficios</h3>
+  <ul>
+   <li>Programa de fidelidad</li>
+   <li>Rebajas estacionales</li>
+   <li>Muestras gratuitas</li>
+   <li>Regalos por compra</li>
+   <li>Envíos a domicilio</li>
+  </ul>
+
+  <h3>Diapositiva 11 – Testimonios</h3>
+  <ul>
+   <li>“Excelentes fragancias y atención impecable.”</li>
+   <li>“Siempre encuentro perfumes auténticos y de larga duración.”</li>
+   <li>“Me encanta la asesoría personalizada.”</li>
+  </ul>
+
+  <h3>Diapositiva 12 – Contacto</h3>
+  <p>
+   <b>Perfumería Esencia Bella</b><br>
+   Dirección: (colocar dirección)<br>
+   Teléfono: (número)<br>
+   Redes sociales: Instagram, Facebook, TikTok<br>
+   Correo: (email)
+  </p>
+
+  <h3>Diapositiva 13 – Cierre</h3>
+  <p>✨ Gracias por su atención — Descubre tu esencia con nosotros ✨</p>
+
+ </div>
+</section>
+
 <footer class="footer">© 2025 PERFUMERÍA DUBAI PERU — Todos los derechos reservados.</footer>
 
-<!-- BOTÓN WHATSAPP -->
 <a href="https://wa.me/51987459700" class="whatsapp-btn" target="_blank">
- <img src="https://imgs.search.brave.com/4pKJg98gke7qKUrdJjLkcq0I5e7irzDqLdNn-xtxqag/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMTM4NC8xMzg0/MDU1LnBuZw" alt="WhatsApp">
+ <img src="https://imgs.search.brave.com/4pKJg98gke7qKUrdJjLkcq0I5e7irzDqLdNn-xtxqag/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvMTM4NC8xMzg0/MDU1LnBuZw">
 </a>
 
 <script>
